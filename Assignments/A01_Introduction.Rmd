@@ -22,7 +22,7 @@ The completed exercise is due on <>.
 
 1. What are your previous experiences with data analytics, R, and Git? Include both formal and informal training.
 
-> Answer: As for analyticS, I have learned python for makrketing. 
+> Answer: As for analyticS, I have learned python for makrketing, including visiualization, regression, modeling, segmentation, corpus analysis, etc. 
 
 2. Are there any components of the course about which you feel confident?
 
