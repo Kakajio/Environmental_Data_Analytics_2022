@@ -22,15 +22,15 @@ The completed exercise is due on <>.
 
 1. What are your previous experiences with data analytics, R, and Git? Include both formal and informal training.
 
-> Answer: As for analyticS, I have learned python for makrketing, including visiualization, regression, modeling, segmentation, corpus analysis, etc. 
+> Answer: As for data analytics, I have learned python in a market analysis course. I learned visulization, regression, modeling, segmentation, corpus analysis etc. in that course. As for r, I do not have much experience. I only used r in a statistic course to do some basic visulization and find p value. As for Git, I do not have any experience. 
 
 2. Are there any components of the course about which you feel confident?
 
-> Answer: 
+> Answer: I feel confident about my ability of doing assignments. 
 
 3. Are there any components of the course about which you feel apprehensive?
 
-> Answer: 
+> Answer: I have not learnt these components - Time Series Analysis, stationarity, trends, seasonality, tests, Spatial Data Analysis, Data Scraping, web-scraped data, manual copy & paste, API, DOM parsing. I also met data cleaning porblems during my MP project, so I want to find some inspirations in this course. 
 
 
 ## 2) GitHub
@@ -38,5 +38,6 @@ The completed exercise is due on <>.
 Provide a link below to your forked course repository in GitHub. Make sure you have pulled all recent changes from the course repository  and that you have updated your course README file. 
 
 > Answer: 
+https://github.com/Kakajio/Environmental_Data_Analytics_2022.git
 
 
