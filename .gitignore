@@ -40,3 +40,4 @@ vignettes/*.pdf
 
 # Rproject files
 *.Rproj
+.Rproj.user
