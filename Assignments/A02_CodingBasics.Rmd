@@ -36,11 +36,11 @@ hun_sequence <- seq(1, 100, 4)
 
 hun_sequence
 
-#2
+#2 Find the mean and median of hun_sequence
 mean(hun_sequence)
 median(hun_sequence)
 
-#3
+#3 Determine whether the mean of hun_sequence is greater than the median of hun_sequence
 mean(hun_sequence)>median(hun_sequence)
 
 ```
@@ -57,8 +57,8 @@ mean(hun_sequence)>median(hun_sequence)
 
 ```{r}
 #5 
-student_name <- c("Lily","Bily","Cici","Andy") #names of students
-test_score<-c(51, 55, 52, 50) # test scores out of a total 100 points
+student_name <- c("Lily","Bily","Cici","Andy") #names of students (Nominal data)
+test_score<-c(51, 55, 52, 50) # test scores out of a total 100 points (discrete data)
 test_score>=50
 score_df <- data.frame("Name"=student_name,"Score"=test_score)
 score_df
@@ -85,4 +85,4 @@ Score <- Scorejudge(test_score); Score
 
 12. QUESTION: Which option of `if` and `else` vs. `ifelse` worked? Why?
 
-> Answer: ifelse worked, but if and else no. Becuasue ifelse can be used to treat vector, but if and else cannot. 
+> Answer: ifelse worked, but 'if' and 'else' not. Becuasue ifelse can be used to treat vector, but 'if' and 'else' cannot. 
