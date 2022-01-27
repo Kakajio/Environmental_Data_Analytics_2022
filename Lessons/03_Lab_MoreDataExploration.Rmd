@@ -93,13 +93,23 @@ Question: In the R chunk below, write "dataframe1$". Press `tab` after you type 
 Find a ten-day forecast of temperatures (Fahrenheit) for Durham, North Carolina. Create two vectors, one representing the high temperature on each of the ten days and one representing the low.
 
 ```{r}
-
+vector_high <- c(49,46,45,59,66,59,51,51,43,34)
+vector_low <- c(31,29,22,27,48,49,33,25,26,15)
 ```
 
 Now, create two additional vectors that include the ten-day forecast for the high and low temperatures in Celsius. Use a function to create the two new vectors from your existing ones in Fahrenheit.
 
 ```{r}
+celsius_fahrenheit <- function(x){
+  celsius <- x/1.5-32/1.5
+  return(celsius)
+}
 
+celsiushigh <- celsius_fahrenheit(vector_high); celsiushigh
+```
+
+```{r}
+celsiuslow <- celsius_fahrenheit(vector_low); celsiuslow
 ```
 
 Combine your four vectors into a data frame and add informative column names.
@@ -133,9 +143,10 @@ Remember formatting of dates in R:
 # An example is provided to get you started.
 # (code must be uncommented)
 today <- Sys.Date()
+today
 format(today, format = "%B")
-#format(today, format = "")
-#format(today, format = "")
+format(today, format = "%y")
+format(today, format = "%m-%d-%y")
 #format(today, format = "")
 
 ```
@@ -148,7 +159,7 @@ Install and load the package lubridate into your R session. Lubridate offers fas
 More info on lubridate [here][https://cran.r-project.org/web/packages/lubridate/lubridate.pdf].
 
 ```{r DateExercise1}
-#install.packages("lubridate")
+install.packages("lubridate")
 library(lubridate)
 
 #Ex1
@@ -156,14 +167,14 @@ str_today <- "2021-feb-3"
 #Since the format is year-month-day we will use function ymd()
 date_obj_today <- ymd(str_today)
 date_obj_today
-
+class(date_obj_today)
 #Ex2
 str_today <- "21-feb-3"
 #Sine the format is year-month-day we will use function ymd()
 date_obj_today <- ymd(str_today)
 date_obj_today
 
-#there are other similar functions ydm(), mdy(), etc
+#there are other similar functions ydm(), mdy(), md() etc
 ```
 
 ```{r DateExercise2}
