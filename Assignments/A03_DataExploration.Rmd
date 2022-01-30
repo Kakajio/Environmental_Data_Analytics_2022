@@ -46,9 +46,11 @@ Litter <- read.csv("../Data/Raw/NEON_NIWO_Litter_massdata_2018-08_raw.csv", stri
 4. How is litter and woody debris sampled as part of the NEON network? Read the NEON_Litterfall_UserGuide.pdf document to learn more. List three pieces of salient information about the sampling methods here: 
 
 > Answer: 
-*
-*
-*
+* The sampling of litter and woody debris only takes place in tower plots. Locations of tower plots are selected randomly within the 90% flux footprint of the primary and
+secondary airsheds.In sites with forested tower airsheds, the litter sampling is targeted to take place in 20 40m x 40m plots. In sites with low-statured wegetation over the tower airsheds, litter sampling is targeted to take place in 4 40m x 40m tower plots (to accommodate co-located soil sampling) plus 26 20m x 20m plots.
+* One litter trap pair (one elevated trap and one ground trap) is deployed for every 400 m2 plot area, resulting in 1-4 trap pairs per plot.
+* In sites with >50% aerial cover of woody vegetation >2m in height, placement of litter traps is random; In sites with < 50% cover of woody vegetation, sites with
+heterogeneously distributed, patchy, vegetation, trap placement is targeted such that only areas beneath qualifying vegetation are considered for trap placement.
 
 ## Obtain basic summaries of your data (Neonics)
 
