@@ -154,4 +154,4 @@ dim(summary_data)
 
 14. Why did we use the function `drop_na` rather than `na.omit`?
 
-> Answer: drop_na is to drop the missing data, whereas na.omit is to omit the missing data when calculating, but the missing data are still in the dataset. 
+> Answer: drop_na is to delete the row that has NA in the designated column(s) whereas na.omit is to drop any row that has NA.  
