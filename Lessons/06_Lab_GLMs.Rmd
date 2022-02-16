@@ -13,6 +13,9 @@ editor_options:
 2. Answer questions on M6 - GLMs
 3. Additional comments on videos - t-test
 4. Practice more application GLM to real datasets
+```{r}
+#install.packages("agricolae")
+```
 
 
 ## Set up
@@ -66,11 +69,10 @@ Are Ozone levels below the threshold for "good" AQI index (0-50)?
 
 > Exercise 1: State the hypotheses for testing mean of AQI index.
 
-> Answer: 
+> Answer: Ho: All Ozone levels are below the threshold for "good" AQI index. 
 
 
 ```{r}
-
 
 summary(EPAair$Ozone)
 EPAair.subsample <- sample_n(EPAair, 5000)
@@ -125,7 +127,6 @@ summary(O3.twosample2)
 
 plot(O3.twosample2)
 
-
 ```
 
 
@@ -151,7 +152,29 @@ Create three plots, each with appropriately formatted axes and legends. Choose a
 
 ```{r}
 #Exercise 2:
+density<- 
+  ggplot(EPAair, 
+         aes(x=Ozone, fill=as.factor(Year))) + 
+  geom_density(alpha=0.5) +
+  scale_fill_manual(values=c("darkgreen", "darkblue"))+
+  labs(x="Ozone AQI value", y="Density", fill="")
+print(density)
 
+boxplot<-
+  ggplot(EPAair, aes(x=as.factor(Year), y= Ozone))+
+  geom_boxplot()+
+  stat_summary(geom="text", fun.y=max, vjust = -1, size=4, label=c("b", "a"))+
+  labs(x="", y="Ozone AQI value")
+  ylime(0,150)
+print(boxplot)
+
+violin<-
+  ggplot(EPAair, aes(x=as.factor(Year), y= Ozone))+
+  geom_violin(draw_quantiles = 0.5)+
+  stat_summary(geom="text", fun.y=max, vjust = -1, size=4, label=c("b", "a"))+
+  labs(x="", y="Ozone AQI value")
+  ylime(0,150)
+print(violin)
 
 ```
 
