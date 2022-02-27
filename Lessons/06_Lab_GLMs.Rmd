@@ -69,7 +69,7 @@ Are Ozone levels below the threshold for "good" AQI index (0-50)?
 
 > Exercise 1: State the hypotheses for testing mean of AQI index.
 
-> Answer: Ho: All Ozone levels are below the threshold for "good" AQI index. 
+> Answer: Ho: All Ozone levels are below the threshold for "good" AQI index. H0: mu<=50; Ha:mu>50
 
 
 ```{r}
@@ -187,11 +187,17 @@ For the NTL-LTER dataset, can we predict PM2.5 from Ozone?
 ```{r}
 
 #Exercise 3: Run a linear regression PM2.5 by Ozone. Find the p-value and R-squared value. 
-
+pmozone <- lm(data = EPAair, PM2.5 ~ Ozone)
+summary(pmozone)
 
 
 #Exercise 4: Build a scatterplot. Add a line and standard error for the linear regression. 
-
+pmozoneplot <- 
+  ggplot(EPAair, aes(x = Ozone, y = PM2.5)) +
+  ylim(0, 100) +
+  geom_smooth(method = 'lm', se = FALSE, color = "black") +
+  geom_point()
+print(pmozoneplot) 
 
 
 ```
@@ -204,21 +210,31 @@ What other variables can we add to improve model?
 ```{r}
 
 #Exercise 5: Build correlation plots and identify more possible explanatory variables to add to the regression.
-
-
-
+#install.packages("corrplot")
+library(corrplot)
+EPANUM <- 
+  EPAair %>%
+  select(meanLat:Ozone) %>%
+  na.omit()
+ex5 <- cor(EPANUM)
+corrplot(ex5, method = "ellipse")
+corrplot.mixed(ex5, upper = "ellipse")
 
 #Exercise 6: Choose a model by AIC in a Stepwise Algorithm. Do the results from AIC match the variables you selected on Exercise 5?
+EPA.naomit <- EPAair %>%
+  na.omit()
 
+ex6TPAIC <- lm(data = EPA.naomit, PM2.5 ~ Ozone + meanLat + 
+              meanLng + Month + Year)
 
+step(ex6TPAIC)
 
 
 #Exercise 7: Run another regression using the variables selected on Exercise 6. Compare r-squared value with the one from Exercise 5. 
 
+
+EX7<-lm(data = EPA.naomit, PM2.5 ~ Ozone + meanLat + 
+              meanLng + Month)
+summary(EX7)
 ```
-
-
-
-
-
 
