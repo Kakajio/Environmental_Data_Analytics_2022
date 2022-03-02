@@ -29,7 +29,7 @@ The completed exercise is due on Monday, February 28 at 7:00 pm.
 
 2.  Build a ggplot theme and set it as your default theme.
 
-```{r setup}
+```{r}
 #1
 getwd()
 library(tidyverse)
@@ -46,7 +46,7 @@ theme_set(mytheme)
 
 Our first research question is: Does mean lake temperature recorded during July change with depth across all lakes?
 
-3.  State the null and alternative hypotheses for this question: \> Answer: p\<0.001, β1 ≠ 0, so we rejct null hypothesis. Mean lake temperature recorded during July change with depth across all lakes. H0: β1 = 0 Ha: β1 ≠ 0
+3.  State the null and alternative hypotheses for this question: > Answer: p <0.001, b1 /= 0, so we reject null hypothesis. Mean lake temperature recorded during July change with depth across all lakes. H0: b1 = 0 Ha: b1 /= 0
 
 4.  Wrangle your NTL-LTER dataset with a pipe function so that the records meet the following criteria:
 
@@ -56,7 +56,7 @@ Our first research question is: Does mean lake temperature recorded during July 
 
 5.  Visualize the relationship among the two continuous variables with a scatter plot of temperature by depth. Add a smoothed line showing the linear model, and limit temperature values from 0 to 35 °C. Make this plot look pretty and easy to read.
 
-```{r scatterplot}
+```{r}
 #4
 library(lubridate)
 NTL$sampledate <- as.Date(NTL$sampledate, format = "%m/%d/%y")
@@ -86,7 +86,7 @@ print(temdep)
 
 7.  Perform a linear regression to test the relationship and display the results
 
-```{r linear.regression}
+```{r}
 #7
 temdepth <- lm(data = July, temperature_C ~ depth)
 summary(temdepth)
@@ -95,7 +95,7 @@ summary(temdepth)
 
 8.  Interpret your model results in words. Include how much of the variability in temperature is explained by changes in depth, the degrees of freedom on which this finding is based, and the statistical significance of the result. Also mention how much temperature is predicted to change for every 1m change in depth.
 
-> Answer: 73.87% of the variability in temperature is explained by changes in depth, the degrees of freedom is 9726, the statistical significance is 2e-16 \< 0.001, therefore, we reject null hypothesis. For every meter change in depth, temperature may decrease 1.94621 celsius degree.
+> Answer: 73.87% of the variability in temperature is explained by changes in depth, the degrees of freedom is 9726, the statistical significance is 2e-16 < 0.001, therefore, we reject null hypothesis. For every meter change in depth, temperature may decrease 1.94621 celsius degree.
 
 ------------------------------------------------------------------------
 
@@ -107,7 +107,7 @@ Let's tackle a similar question from a different approach. Here, we want to expl
 
 10. Run a multiple regression on the recommended set of variables.
 
-```{r temperature.model}
+```{r}
 #9
 temAIC <- lm(data = July, temperature_C ~ depth + year4 + 
               daynum)
@@ -133,7 +133,7 @@ summary(temAIC)
 
 12. Now we want to see whether the different lakes have, on average, different temperatures in the month of July. Run an ANOVA test to complete this analysis. (No need to test assumptions of normality or similar variances.) Create two sets of models: one expressed as an ANOVA models and another expressed as a linear model (as done in our lessons).
 
-```{r anova.model}
+```{r}
 #12
 #summary(NTL$lakename)
 TEM.anova <- aov(data =July, temperature_C ~ lakename)
@@ -148,7 +148,7 @@ summary(TEM.anova2)
 
 14. Create a graph that depicts temperature by depth, with a separate color for each lake. Add a geom_smooth (method = "lm", se = FALSE) for each lake. Make your points 50 % transparent. Adjust your y axis limits to go from 0 to 35 degrees. Clean up your graph to make it pretty.
 
-```{r scatterplot.2}
+```{r}
 #14.
 temdep.lake<- ggplot(July, 
          aes(x = depth, y = temperature_C, color= lakename)) + 
@@ -161,7 +161,7 @@ print(temdep.lake)
 
 15. Use the Tukey's HSD test to determine which lakes have different means.
 
-```{r tukey.test}
+```{r}
 #15
 TukeyHSD(TEM.anova)
 TEM.groups <- HSD.test(TEM.anova, "lakename", group = TRUE)
@@ -175,4 +175,3 @@ TEM.groups
 17. If we were just looking at Peter Lake and Paul Lake. What's another test we might explore to see whether they have distinct mean temperatures?
 
 > Answer: We can use two-sample T-test to explore.
- 
