@@ -1,11 +1,15 @@
 ---
-title: "Assignment 9: Spatial Analysis in R"
+title: 'Assignment 9: Spatial Analysis in R'
 author: "Lehe, Xu"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
 geometry: margin=2.54cm
-editor_options: 
+editor_options:
   chunk_output_type: console
-  markdown: 
+  markdown:
     wrap: 72
 ---
 
@@ -202,9 +206,21 @@ Up next we will do some spatial analysis with our data. To prepare for this, we 
 
 ```{r}
 #20 Transform the counties and gage location datasets to UTM Zone 14
-
+counties_sf14 <- st_transform(counties_sf, crs = 32614)
+NWIS.sf14<-st_transform(NWIS.sf, crs = 32614)
 
 #21 Plot the data
+mymap =mapview(counties_sf14, 
+         col.regions = 'yellow', 
+         alpha.regions = 0.2,
+          map.types = "CartoDB.Positron",
+           legend = FALSE)+
+  mapview(NWIS.sf14, 
+         col.regions = 'green', 
+         alpha.regions = 0.2,
+          map.types = "CartoDB.Positron",
+           legend = FALSE)
+mymap
 
 
 ```
@@ -223,13 +239,26 @@ Now let's zoom into a particular county and examine the gages located there.
 
 ```{r}
 #22 Select the county
-
+Lancaster <- counties_sf14 %>% 
+  filter(NAME %in% c('Lancaster'))
 
 #23 Select gages within the selected county
 
+lancaster_intersect_1 <- NWIS.sf14[Lancaster,]
+
 
 #24 Plot
+myMap1 = mapview(counties_sf14, 
+                col.regions = 'yellow', 
+                alpha.regions = 0.2,
+                map.types = "CartoDB.Positron",
+                legend = FALSE)
+myMap2=mapview(Lancaster,
+               col.regions = 'blue', 
+                alpha.regions = 0.2,
+                map.types = "CartoDB.Positron",
+                legend = FALSE)
 
-
+myMap1 + myMap2 + mapview(lancaster_intersect_1, alpha.regions = 0, cex=1)
 
 ```
