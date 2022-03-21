@@ -118,9 +118,14 @@ mapView(counties_sf, zcol = "AWATER")
 ```{r read HUCs shapefile}
 #Read the shapefile into an sf dataframe named "huc8_sf"
 
+huc8_sf <- st_read('./Data/Spatial/NCHUC8.shp')
+huc8_sf1 <- huc8_sf %>% 
+  filter(SUBBASIN == "Upper Neuse")
 
 #Reveal the columns
-
+ggplot()
+geom_sf(data=huc8_sf1, fill="purple")+
+geom_sf(data=huc8_sf, fill="orange")
 
 #Check the CRS
 
@@ -239,13 +244,19 @@ ggplot() +
 
 ```{r}
 #Compute HUC8 wind energy
-
-
+Wind <- read.csv(
+  'https://raw.githubusercontent.com/ENV859/EnviroAtlasData/main/Wind_Energy.csv',
+  colClasses = c('HUC12' = 'factor')) %>% 
+  mutate(HUC_8=substr(HUC_12, 1, 8))%>% 
+  group_by(HUC_8)%>% 
+  summarize(Sumwindenergy=sum(AvgWindEnergy))
 
 
 #Join to HUC_8 features
 
-
+huc_8_join=merge(x=huc8_sf,
+                 y=wind_raw,
+                 z=)
 
 
 #View the outputs
@@ -274,8 +285,10 @@ mapview(state_sf)
 
 ```{r Aggregate the HUC data on an attribute, saving as huc2_sf}
 #List the unique values in the DWQ_Basin field
-
-
+state_sf1 <- counties_sf %>% 
+  group_by('DWQ_Basin') %>% 
+  summarize(ACRES= sum(ACRES))%>% 
+  summarize(SQ_MILES=sum(SQ_MILES))
 
 
 #Summarize on DWQ Basin value
