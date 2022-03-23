@@ -203,33 +203,56 @@ The RVest scraping workflow is as follows:
 
 ```{r eval=FALSE}
 #1 Link to the web site using read_html
-the_website
+the_website<-read_html("https://www.eia.gov/electricity/state/")
 
 #2&3 Locate elements and read their text attributes into variables
-the_states <- 
-the_price <- 
-the_capacity <- 
-net_generation <- 
-total_retail <- 
+the_states <- the_website %>% html_nodes('.basic_table a') %>% html_text()
+the_price <- the_website %>% html_nodes('td:nth-child(2)') %>% html_text()
+the_capacity <- the_website %>% html_nodes('td:nth-child(3)') %>% html_text()
+net_generation <- the_website %>% html_nodes('td:nth-child(4)') %>% html_text()
+total_retail <- the_website %>% html_nodes('td:nth-child(5)') %>% html_text()
   
 #3 Construct a dataframe from the values
+
+the_df1 <- data.frame(
+    "state" = the_states,
+    "price"= as.numeric(the_price),
+    "capacity" = as.numeric(gsub(",","", the_capacity)),
+    "generation" = as.numeric(gsub(",","", net_generation)),
+    "total_retail" = as.numeric(gsub(",","", total_retail))
+)
+
 ```
 
 
 ```{r create.scrape.function}
 scrape.it <- function(the_year){
   #Get the proper url
-  the_url <- ifelse(the_year==2019,
+  the_url <- ifelse(the_year==2020,
                     'https://www.eia.gov/electricity/state/',
-                    paste('https://www.eia.gov/electricity/state/archive',the_year,'/'))
+                    paste0('https://www.eia.gov/electricity/state/archive/',the_year,'/'))
 
   #Fetch the website
   #<enter code from above here> 
-  
+  the_website<-read_html(the_url)
   #Scrape the data
+  the_states <- the_website %>% html_nodes('.basic_table a') %>% html_text()
+the_price <- the_website %>% html_nodes('td:nth-child(2)') %>% html_text()
+the_capacity <- the_website %>% html_nodes('td:nth-child(3)') %>% html_text()
+net_generation <- the_website %>% html_nodes('td:nth-child(4)') %>% html_text()
+total_retail <- the_website %>% html_nodes('td:nth-child(5)') %>% html_text()
   #<enter code from above here>
   
   #Convert to dataframe
+the_df <- data.frame(
+    "state" = the_states,
+    "price"= as.numeric(the_price),
+    "capacity" = as.numeric(gsub(",","", the_capacity)),
+    "generation" = as.numeric(gsub(",","", net_generation)),
+    "total_retail" = as.numeric(gsub(",","", total_retail)),
+    "year"=the_year
+)
+
   #<enter code from above here>
   
   #Return the dataframe
@@ -238,9 +261,13 @@ scrape.it <- function(the_year){
 
 
 # Use the above function to scrape data for 2017
-
+df_2017<-scrape.it(2018)
 
 # Map the function to scrape data from 2017 to 2020
+the_years <- seq(2017,2020)
+
+the_data<-lapply(X=the_years,FUN=scrape.it) %>% bind_rows()
+
 
 
 ```
